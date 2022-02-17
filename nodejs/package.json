@@ -2,9 +2,16 @@
   "name": "count_dracula",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "Alejandro AR (kinduff)",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "redis": "^4.0.3"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
