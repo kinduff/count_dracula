@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { createServer } from 'http';
 import { createClient } from "redis";
 
@@ -9,21 +10,11 @@ import { createClient } from "redis";
   const redisClient = createClient({ url: process.env.REDIS_URL });
   await redisClient.connect();
 
-  function generateHashCode(input) {
-    var hash = 0, i, chr;
-    for (i = 0; i < input.length; i++) {
-      chr   = input.charCodeAt(i);
-      hash  = ((hash << 5) - hash) + chr;
-      hash |= 0;
-    }
-    return hash;
-  }
-
   async function requestResponseHandler(req, res) {
-    const hash = generateHashCode(req.url);
+    const hash = crypto.createHash('sha256').update(req.url).digest('hex');
     const value = await redisClient.incr(hash);
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ total: value }));
+    res.end(JSON.stringify({ req: req.url, hash: hash, total: value }));
   }
 
   const httpServer = createServer(requestResponseHandler);
@@ -31,3 +22,5 @@ import { createClient } from "redis";
     console.log(`Server is listening on port ${PORT}`);
   });
 })();
+
+
