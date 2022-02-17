@@ -14,7 +14,7 @@ import { createClient } from "redis";
     const hash = crypto.createHash('sha256').update(req.url).digest('hex');
     const value = await redisClient.incr(hash);
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ req: req.url, hash: hash, total: value }));
+    res.end(JSON.stringify({ total: value }));
   }
 
   const httpServer = createServer(requestResponseHandler);
@@ -22,5 +22,3 @@ import { createClient } from "redis";
     console.log(`Server is listening on port ${PORT}`);
   });
 })();
-
-
