@@ -1,0 +1,10 @@
+{
+  "name": "count_dracula",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "redis": "^4.0.3"
+  }
+}
