@@ -1,8 +1,9 @@
 {
   "name": "count_dracula",
+  "description": "SS API to call using Redis.",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Alejandro AR (kinduff)",
+  "author": "Alejandro AR <kinduff@protonmail.com>",
   "license": "MIT",
   "type": "module",
   "scripts": {
